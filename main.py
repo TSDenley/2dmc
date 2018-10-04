@@ -46,7 +46,7 @@ tilemap = [
 for t_row in range(MAP_HEIGHT):
     for t_column in range(MAP_WIDTH):
         rand_val = randint(0, 99)
-        if rand_val == 1:
+        if rand_val == 0:
             tilemap[t_row][t_column] = DIAMOND
         elif rand_val < 5:
             tilemap[t_row][t_column] = COAL
@@ -65,6 +65,9 @@ MAIN_WINDOW = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption('2D MineCraft')
 clock = pygame.time.Clock()
 
+PLAYER = load(ASSETS_PATH + 'player-01.png').convert_alpha()
+player_pos = [ 0, 0 ]
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -81,6 +84,13 @@ while True:
                 TILE_TEXTURES[tilemap[row][column]],
                 (column * TILE_SIZE, row * TILE_SIZE)
             )
+
+    # Draw player
+    MAIN_WINDOW.blit(
+        PLAYER,
+        ((player_pos[0] * TILE_SIZE)+8,
+         (player_pos[1] * TILE_SIZE)+8)
+    )
 
     # Refresh display
     pygame.display.flip()
