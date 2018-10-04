@@ -1,5 +1,6 @@
 import sys
 import pygame
+from pygame.image import load
 from pygame.locals import *
 
 # Define some colours
@@ -15,21 +16,23 @@ GRASS = 1
 WATER = 2
 COAL = 3
 
+ASSETS_PASTH = './assets/'
+
 # Link tiles to colours
-TILE_COLORS = {
-    DIRT: BROWN,
-    GRASS: GREEN,
-    WATER: BLUE,
-    COAL: BLACK,
+TILE_TEXTURES = {
+    DIRT: load(ASSETS_PASTH + 'dirt.png'),
+    GRASS: load(ASSETS_PASTH + 'grass.png'),
+    WATER: load(ASSETS_PASTH + 'water.png'),
+    COAL: load(ASSETS_PASTH + 'coal.png'),
 }
 
 tilemap = [
-    [ GRASS, GRASS, GRASS, COAL ],
-    [ GRASS, WATER, GRASS, GRASS ],
+    [ DIRT, GRASS, GRASS, COAL ],
+    [ DIRT, WATER, GRASS, GRASS ],
     [ WATER, WATER, WATER, GRASS ],
     [ GRASS, GRASS, GRASS, COAL ],
     [ GRASS, COAL, COAL, WATER ],
-    [ GRASS, GRASS, GRASS, WATER ],
+    [ DIRT, GRASS, GRASS, WATER ],
 ]
 
 # Game dimensions
@@ -59,11 +62,9 @@ while True:
     # Draw the tiles
     for row in range(MAP_HEIGHT):
         for column in range(MAP_WIDTH):
-            pygame.draw.rect(
-                MAIN_WINDOW,
-                TILE_COLORS[tilemap[row][column]],
-                (column * TILE_SIZE, row * TILE_SIZE,
-                TILE_SIZE, TILE_SIZE)
+            MAIN_WINDOW.blit(
+                TILE_TEXTURES[tilemap[row][column]],
+                (column * TILE_SIZE, row * TILE_SIZE)
             )
 
     # Refresh display
