@@ -74,6 +74,17 @@ while True:
             pygame.quit()
             sys.exit()
 
+        elif event.type == KEYDOWN:
+            # Move the player with the arrow keys
+            if event.key == K_RIGHT and player_pos[0] < MAP_WIDTH - 1:
+                player_pos[0] += 1
+            elif event.key == K_LEFT and player_pos[0] > 0:
+                player_pos[0] -= 1
+            elif event.key == K_DOWN and player_pos[1] < MAP_HEIGHT -1:
+                player_pos[1] += 1
+            elif event.key == K_UP and player_pos[1] > 0:
+                player_pos[1] -= 1
+
     # Background colour
     MAIN_WINDOW.fill(WHITE)
 
