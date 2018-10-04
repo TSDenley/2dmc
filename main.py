@@ -1,4 +1,5 @@
 import sys
+from random import choice, randint
 import pygame
 from pygame.image import load
 from pygame.locals import *
@@ -15,30 +16,44 @@ DIRT = 0
 GRASS = 1
 WATER = 2
 COAL = 3
+DIAMOND = 4
 
-ASSETS_PASTH = './assets/'
+ASSETS_PATH = './assets/'
 
 # Link tiles to colours
 TILE_TEXTURES = {
-    DIRT: load(ASSETS_PASTH + 'dirt.png'),
-    GRASS: load(ASSETS_PASTH + 'grass.png'),
-    WATER: load(ASSETS_PASTH + 'water.png'),
-    COAL: load(ASSETS_PASTH + 'coal.png'),
+    DIRT: load(ASSETS_PATH + 'dirt.png'),
+    GRASS: load(ASSETS_PATH + 'grass.png'),
+    WATER: load(ASSETS_PATH + 'water.png'),
+    COAL: load(ASSETS_PATH + 'coal.png'),
+    DIAMOND: load(ASSETS_PATH + 'diamond.png'),
 }
 
-tilemap = [
-    [ DIRT, GRASS, GRASS, COAL ],
-    [ DIRT, WATER, GRASS, GRASS ],
-    [ WATER, WATER, WATER, GRASS ],
-    [ GRASS, GRASS, GRASS, COAL ],
-    [ GRASS, COAL, COAL, WATER ],
-    [ DIRT, GRASS, GRASS, WATER ],
-]
+RESOURCES = [ DIRT, GRASS, WATER, COAL, DIAMOND ]
 
 # Game dimensions
 TILE_SIZE = 32
-MAP_WIDTH = len(tilemap[0])
-MAP_HEIGHT = len(tilemap)
+MAP_WIDTH = 20
+MAP_HEIGHT = 20
+
+# Generate base map
+tilemap = [
+    [ DIRT for w in range(MAP_WIDTH) ]
+    for h in range(MAP_HEIGHT)
+]
+
+# Plot tiles
+for t_row in range(MAP_HEIGHT):
+    for t_column in range(MAP_WIDTH):
+        rand_val = randint(0, 99)
+        if rand_val == 1:
+            tilemap[t_row][t_column] = DIAMOND
+        elif rand_val < 5:
+            tilemap[t_row][t_column] = COAL
+        elif rand_val < 25:
+            tilemap[t_row][t_column] = WATER
+        elif rand_val < 70:
+            tilemap[t_row][t_column] = GRASS
 
 pygame.init()
 
