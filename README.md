@@ -1,4 +1,4 @@
-# Py RPG
+# 2DMC
 
 2D MineCraft like game in pygame
 
