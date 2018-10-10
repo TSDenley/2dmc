@@ -59,7 +59,8 @@ pygame.init()
 
 # Set the width and height of the screen [width, height]
 WINDOW_WIDTH = MAP_WIDTH * TILE_SIZE
-WINDOW_HEIGHT = MAP_HEIGHT * TILE_SIZE
+INVENTORY_HEIGHT = 50
+WINDOW_HEIGHT = MAP_HEIGHT * TILE_SIZE + 50
 WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT)
 MAIN_WINDOW = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption('2D MineCraft')
@@ -75,6 +76,8 @@ inventory = {
     COAL: 0,
     DIAMOND: 0,
 }
+
+INV_FONT = pygame.font.SysFont(None, 18)
 
 while True:
     for event in pygame.event.get():
@@ -96,10 +99,9 @@ while True:
             if event.key == K_SPACE:
                 current_tile = tilemap[player_pos[1]][player_pos[0]]
                 inventory[current_tile] += 1
-                print(inventory)
 
     # Background colour
-    MAIN_WINDOW.fill(WHITE)
+    MAIN_WINDOW.fill(BLACK)
 
     # Draw the tiles
     for row in range(MAP_HEIGHT):
@@ -108,6 +110,18 @@ while True:
                 TILE_TEXTURES[tilemap[row][column]],
                 (column * TILE_SIZE, row * TILE_SIZE)
             )
+
+    # Draw inventory
+    inv_pos = 10
+    for item in RESOURCES:
+        # Texture image
+        MAIN_WINDOW.blit(TILE_TEXTURES[item], (inv_pos, MAP_HEIGHT * TILE_SIZE + 10))
+        inv_pos += 40
+
+        # Text
+        text_obj = INV_FONT.render(str(inventory[item]), True, WHITE, BLACK)
+        MAIN_WINDOW.blit(text_obj, (inv_pos, MAP_HEIGHT * TILE_SIZE + 20))
+        inv_pos += 50
 
     # Draw player
     MAIN_WINDOW.blit(
