@@ -68,6 +68,14 @@ clock = pygame.time.Clock()
 PLAYER = load(ASSETS_PATH + 'player-01.png').convert_alpha()
 player_pos = [ 0, 0 ]
 
+inventory = {
+    DIRT: 0,
+    GRASS: 0,
+    WATER: 0,
+    COAL: 0,
+    DIAMOND: 0,
+}
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -84,6 +92,11 @@ while True:
                 player_pos[1] += 1
             elif event.key == K_UP and player_pos[1] > 0:
                 player_pos[1] -= 1
+
+            if event.key == K_SPACE:
+                current_tile = tilemap[player_pos[1]][player_pos[0]]
+                inventory[current_tile] += 1
+                print(inventory)
 
     # Background colour
     MAIN_WINDOW.fill(WHITE)
