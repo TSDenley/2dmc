@@ -96,9 +96,12 @@ while True:
             elif event.key == K_UP and player_pos[1] > 0:
                 player_pos[1] -= 1
 
+            # Pic up tiles
             if event.key == K_SPACE:
                 current_tile = tilemap[player_pos[1]][player_pos[0]]
                 inventory[current_tile] += 1
+                if inventory[current_tile] != DIRT:
+                    tilemap[player_pos[1]][player_pos[0]] = DIRT
 
             # Place a tile if we have one in our inventory
             # placed tile is swaped with current tile
