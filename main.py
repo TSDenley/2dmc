@@ -100,6 +100,35 @@ while True:
                 current_tile = tilemap[player_pos[1]][player_pos[0]]
                 inventory[current_tile] += 1
 
+            # Place a tile if we have one in our inventory
+            # placed tile is swaped with current tile
+            current_tile = tilemap[player_pos[1]][player_pos[0]]
+            if event.key == K_1:
+                if inventory[DIRT] > 0:
+                    inventory[DIRT] -= 1
+                    tilemap[player_pos[1]][player_pos[0]] = DIRT
+                    inventory[current_tile] += 1
+            elif event.key == K_2:
+                if inventory[GRASS] > 0:
+                    inventory[GRASS] -= 1
+                    tilemap[player_pos[1]][player_pos[0]] = GRASS
+                    inventory[current_tile] += 1
+            elif event.key == K_3:
+                if inventory[WATER] > 0:
+                    inventory[WATER] -= 1
+                    tilemap[player_pos[1]][player_pos[0]] = WATER
+                    inventory[current_tile] += 1
+            elif event.key == K_4:
+                if inventory[COAL] > 0:
+                    inventory[COAL] -= 1
+                    tilemap[player_pos[1]][player_pos[0]] = COAL
+                    inventory[current_tile] += 1
+            elif event.key == K_5:
+                if inventory[DIAMOND] > 0:
+                    inventory[DIAMOND] -= 1
+                    tilemap[player_pos[1]][player_pos[0]] = DIAMOND
+                    inventory[current_tile] += 1
+
     # Background colour
     MAIN_WINDOW.fill(BLACK)
 
