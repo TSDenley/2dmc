@@ -103,9 +103,9 @@ while True:
             elif event.key == K_UP and player_pos[1] > 0:
                 player_pos[1] -= 1
 
+            current_tile = tilemap[player_pos[1]][player_pos[0]]
             # Pic up tiles
             if event.key == K_SPACE:
-                current_tile = tilemap[player_pos[1]][player_pos[0]]
                 inventory[current_tile] += 1
                 # Replace other tiles with dirt
                 if inventory[current_tile] != DIRT:
@@ -113,15 +113,15 @@ while True:
 
             # Place a tile
             if event.key == K_1:
-                place_tile(DIRT, tilemap[player_pos[1]][player_pos[0]])
+                place_tile(DIRT, current_tile)
             elif event.key == K_2:
-                place_tile(GRASS, tilemap[player_pos[1]][player_pos[0]])
+                place_tile(GRASS, current_tile)
             elif event.key == K_3:
-                place_tile(WATER, tilemap[player_pos[1]][player_pos[0]])
+                place_tile(WATER, current_tile)
             elif event.key == K_4:
-                place_tile(COAL, tilemap[player_pos[1]][player_pos[0]])
+                place_tile(COAL, current_tile)
             elif event.key == K_5:
-                place_tile(DIAMOND, tilemap[player_pos[1]][player_pos[0]])
+                place_tile(DIAMOND, current_tile)
 
     # Background colour
     MAIN_WINDOW.fill(BLACK)
