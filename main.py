@@ -67,6 +67,8 @@ pygame.display.set_caption('2D MineCraft')
 clock = pygame.time.Clock()
 
 PLAYER = load(ASSETS_PATH + 'player-01.png').convert_alpha()
+pygame.display.set_icon(PLAYER)
+
 player_pos = [ 0, 0 ]
 
 inventory = {
@@ -155,4 +157,4 @@ while True:
 
     # Refresh display
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(24)
